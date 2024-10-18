@@ -2,9 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -26,13 +24,17 @@ const NewMessage = () => {
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
              <FormControl fullWidth sx={{width: "100vw"}}>
                 <TextField
-                
                 value={message}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '24px',
+                    },
+                }}
                 onChange={(e) => setMessage(e.target.value)}
                     slotProps={{
                         input: {
                           startAdornment: <InputAdornment position="start"><IconButton><AttachFileIcon/></IconButton></InputAdornment>,
-                          endAdornment: <InputAdornment onClick={() => sendMessage()} position="start"><IconButton><ArrowUpwardIcon/></IconButton></InputAdornment>
+                          endAdornment: <InputAdornment onClick={() => sendMessage()} position="start"><IconButton disabled={message ? false : true}><ArrowUpwardIcon/></IconButton></InputAdornment>
                         },
                       }}
                     id="outlined-chat-input"
